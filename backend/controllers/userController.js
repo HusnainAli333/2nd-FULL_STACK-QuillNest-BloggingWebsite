@@ -31,11 +31,11 @@ function formatData(user) {
 }
 
 async function userSignUp(req, res) {
-  const { fullName, email, password } = req.body;
-  console.log(fullName);
+  const { fullname, email, password } = req.body;
+
   //VALIDATION
 
-  if (fullName.length <= 3) {
+  if (fullname.length <= 3) {
     return res
       .status(403)
       .json({ error: "name should be at least 3 characters long" });
@@ -59,7 +59,7 @@ async function userSignUp(req, res) {
 
     const user = new User({
       personal_info: {
-        fullname: fullName,
+        fullname: fullname,
         email,
         password: hashed_password,
         username,
@@ -74,7 +74,7 @@ async function userSignUp(req, res) {
       .catch((err) => {
         if (err.code === 11000) {
           return res.status(500).json({
-            erro: "Email Already exist",
+            error: "Email Already exist",
           });
         }
 
